@@ -1,11 +1,11 @@
 import Sequelize,{CreationOptional, ForeignKey, Model } from 'sequelize';
 import db from '../sequelize-client'; 
-import Employee from './employee.model'; 
+import User from './user.model'; 
 
 interface AccessTokenModelCreationAttributes {
   tokenType: 'ACCESS' | 'RESET' | 'REFRESH';
   token: string;
-  employeeId: string;
+  userId: string;
   expiredAt?: Date;
 }
 
@@ -17,7 +17,7 @@ class AccessToken extends Model<AccessTokenModelAttributes, AccessTokenModelCrea
   declare id: CreationOptional<string>;
   declare token: string;
   declare tokenType: 'ACCESS' | 'RESET' | 'REFRESH';
-  declare employeeId: ForeignKey<Employee['id']>;
+  declare userId: ForeignKey<User['id']>;
   declare expiredAt: CreationOptional<Date>;
 
   static associate: (models: typeof db) => void;
@@ -39,10 +39,10 @@ export const accessToken = (sequelize: Sequelize.Sequelize, DataTypes: typeof Se
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
-      employeeId: {
+      userId: {
         type: DataTypes.UUID,
         allowNull: false,
-        field: 'employee_id'
+        field: 'user_id'
       },
       expiredAt: {
         type: DataTypes.DATE,
@@ -58,15 +58,15 @@ export const accessToken = (sequelize: Sequelize.Sequelize, DataTypes: typeof Se
       indexes: [
         {
           unique: true,
-          fields: ['employee_id', 'token'],
+          fields: ['user_id', 'token'],
         },
       ],
     }
   );
 
   AccessToken.associate = models => {
-    AccessToken.belongsTo(models.Employee, {
-      foreignKey: 'employee_id',
+    AccessToken.belongsTo(models.User, {
+      foreignKey: 'user_id',
       targetKey: 'id',
     });
   };

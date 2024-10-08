@@ -3,9 +3,12 @@ dotenv.config();
 import { DataTypes,Sequelize } from 'sequelize';
 
 import config from './models/config';
-import { employee } from './models/employee.model';
-import {department} from './models/department.model';
+import { user } from './models/user.model';
+import {post} from './models/post.model';
+import {comment} from './models/comment.model';
 import {accessToken} from './models/access-token';
+import {like} from './models/like.model';
+
 
 
 const env = process.env.NODE_ENV || 'development';
@@ -24,9 +27,11 @@ const sequelize = new Sequelize(dbConfig.database,dbConfig.username, dbConfig.pa
 
 const db = {
     sequelize: sequelize,
-     Employee: employee(sequelize,DataTypes),
-     Department: department(sequelize,DataTypes),
-    AccessToken: accessToken(sequelize,DataTypes),
+     User: user(sequelize,DataTypes),
+     Post: post(sequelize,DataTypes),
+     Comment: comment(sequelize,DataTypes),
+     AccessToken: accessToken(sequelize,DataTypes),
+     Like:like(sequelize,DataTypes),
 
     models: sequelize.models
 };

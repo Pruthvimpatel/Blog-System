@@ -2,14 +2,14 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 dotenv.config();
 
-// import router from './routes/index.route';
-// import {REST_API_PREFIX} from './constants/routes.constants'
-//  import apiLimiter from './middleware/rate-limit';
+import router from './routes/index.route';
+import {REST_API_PREFIX} from './constants/routes.constants'
+ import apiLimiter from './middleware/rate-limit';
 
 const app = express();
 app.use(express.json());
-// app.use(REST_API_PREFIX.API_V1,apiLimiter)
-// app.use(REST_API_PREFIX.API_V1,router);
+app.use(REST_API_PREFIX.API_V1,apiLimiter)
+app.use(REST_API_PREFIX.API_V1,router);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 app.use((err: any, req: any,res: any, next: any) => {

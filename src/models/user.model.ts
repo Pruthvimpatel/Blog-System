@@ -3,38 +3,38 @@ import bcrypt from "bcrypt";
 import db from '../sequelize-client';
 
 
-export interface EmployeeModelCreationAttributes {
+export interface UserModelCreationAttributes {
     email: string;
     password: string;
 }
 
-export interface EmployeeModelAttribtes extends EmployeeModelCreationAttributes {
+export interface UserModelAttribtes extends UserModelCreationAttributes {
     id: string;
     firstName: string;
     lastName: string;
-    departmentId: string
+    profilePicture?: string | null;
 }
 
-export default class Employee extends Model<InferAttributes<Employee>, InferCreationAttributes<Employee>> {
+export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<string>;
     declare email: string;
     declare password: string;
     declare firstName: CreationOptional<string>;
     declare lastName: CreationOptional<string>;
-    declare departmentId: CreationOptional<string>
+    declare profilePicture: CreationOptional<string | null>
 
     static associate: (models: typeof db) => void;
 
-    static async hashPassword(employee:Employee) {
-        if(employee.password) {
+    static async hashPassword(user:User) {
+        if(user.password) {
             const salt = await bcrypt.genSalt(10);
-            employee.password = await bcrypt.hash(employee.password,salt);
+            user.password = await bcrypt.hash(user.password,salt);
         }
     }
 }
 
-export const employee = (sequelize: Sequelize.Sequelize,DataTypes:typeof Sequelize.DataTypes)=>{
-    Employee.init(
+export const user = (sequelize: Sequelize.Sequelize,DataTypes:typeof Sequelize.DataTypes)=>{
+    User.init(
         {
             id: {
                 type: DataTypes.UUID,
@@ -58,23 +58,23 @@ export const employee = (sequelize: Sequelize.Sequelize,DataTypes:typeof Sequeli
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            departmentId: {
-                type: DataTypes.UUID,
-                allowNull: false,
+            profilePicture: {
+                type: DataTypes.STRING,
+                allowNull: true,
             }
         },
         {
             sequelize,
             underscored: true,
             timestamps: true,
-            modelName: 'Employee',
-            tableName: 'employees',
+            modelName: 'User',
+            tableName: 'users',
             hooks:{
-                beforeCreate:Employee.hashPassword,
-                beforeUpdate:Employee.hashPassword,
+                beforeCreate:User.hashPassword,
+                beforeUpdate:User.hashPassword,
             }
         }
     )
 
-    return Employee;
+    return User;
 };

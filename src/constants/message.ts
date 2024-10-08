@@ -1,0 +1,41 @@
+export const ERROR_MESSAGES = {
+    REQUIRED_FIELDS:'All Fields are required',
+    EMAIL_PASSWORD_REQUIRED: 'Email and password required',
+    EMAIL_REQUIRED: 'Email required',
+    USER_NOT_FOUND: 'User not found',
+    INVALID_CREDENTIALS: 'Invalid credentials',
+    INTERNAL_SERVER_ERROR: 'Internal server error',
+    OLD_PASSWORD_NEW_PASSWORD_REQUIRED: 'Old password and new password required',
+    PASSWORD_NOT_MATCHED: 'Password Not Matched',
+    TOKEN_NOT_FOUND: 'Unauthorized-Token not found',
+    PERMISSION_DENIED: 'You do not have permission to update this product',
+    SOMETHING_ERROR: 'Something went wrong',
+    TOKEN_PASSWORD_REQUIRED: 'Token and Password required',
+    INVALID_RESET_TOKEN: 'Invalid reset token',
+    FILE_REQUIRED: 'Files required',
+    UPDATE_USER_FAILED: 'Updated User failed',
+    POST_NOT_FOUND: 'Post not found',
+    COMMENT_NOT_FOUND: 'Comment not found',
+    LIKE_NOT_FOUND: 'Like not found',
+    PROFILE_UPLOAD_FAILED: 'Profile upload failed',
+
+};
+
+export const SUCCESS_MESSAGES = {
+    USER_CREATED: 'User created successfully',
+    LOGIN_SUCCESS: 'Login Successfully',
+    PASSWORD_UPDATED: 'Password updated successfully',
+    LOGOUT_SUCCESS: 'Logged out successfully',
+    POST_CREATED: 'Post created successfully',
+    POST_UPDATED: 'Post updated successfully',
+    POST_DELETED: 'Post deleted successfully',
+    POST_RETRIEVED: 'Post retrieved successfully',
+    COMMENT_CREATED: 'Comment created successfully',
+    COMMENT_DELETED: 'Comment deleted successfully',
+    COMMENT_UPDATED: 'Comment updated successfully',
+    COMMENT_RETRIEVED: 'Comment retrieved successfully',
+    LIKE_CREATED:'Like created successfully',
+    LIKE_DELETED:'Like deleted successfully',
+    LIKE_ALREADY_EXISTS:'Like already exists successfully',
+    PROFILE_UPDATED_SUCCESSFULLY:'Profile updated successfully'
+};
